@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {AppRegistry, StyleSheet,FlatList, Text, View, Image,ScrollView,Platform,TouchableOpacity} from 'react-native';
 import {Card,CardImage, CardTitle, CardContent, CardAction} from 'react-native-card-view';
 import Button from 'react-native-button';
-
+import Navigator from './router';
 import Icon from 'react-native-vector-icons/FontAwesome'; // 5.0.0
 const plus=(<Icon name="plus-circle" size={80} color="orange" />);
 
 import Modal from 'react-native-modal'; // 2.4.0
 
 export default class Categories extends Component {
-
+    
   state = {
     visibleModal: null,
   }
@@ -40,7 +40,7 @@ export default class Categories extends Component {
   }
 
 componentWillMount(){
-  fetch('https://jsonplaceholder.typicode.com/users')
+  fetch('https://vignancom.000webhostapp.com/')
   .then(response => response.json())
   .then(json => {this.setState({GridViewItems:json})})
 }
@@ -75,43 +75,29 @@ GetGridViewItem (item) {
 
          renderItem={({item}) =>
        <Card style={styles.GridViewBlockStyle}>
-        <CardImage key={item.url}>
-        <TouchableOpacity >
+        <CardImage key={item.Id}>
           <Image 
           style={styles.imagewrap}
           source={{uri: "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"}} 
         />
-        </TouchableOpacity>
         </CardImage>
-        <CardTitle  key={item.username}> 
-         <View><Text>{item.username}</Text></View>
+        <CardTitle  key={item.FirstName}> 
+         <View><Text>{item.FirstName} {item.LastName}</Text></View>
           {/* <View>{this._renderButton("ViewMore", () => this.setState({ visibleModal: 1 }))}</View> */}
         </CardTitle>
-        <CardContent key={item.name}>
+        <CardContent key={item.Email}>
           <View>
-            <Text>Name: {item.name}</Text>
-            <Text>Email: {item.email}</Text>
+            <Text>Email:{item.Email}</Text>
+            <Text>Shopname: {item.ShopName}</Text>
+            <Text>Address:{item.Address}</Text>
           </View>
         </CardContent>
-        <CardAction key={item.id}>
-        <Button
-            style={styles.button} onPress={this._renderModalContent(item,  () => this.setState({ visibleModal: 1 }))}>
-            <Text>ViewMore</Text>
-          </Button>
-        </CardAction>
       </Card>
          }
          numColumns={2}
 
         />
-         
-        <Modal isVisible={this.state.visibleModal === 1}>
-          {this._renderModalContent()}
-        </Modal>
-
-        <TouchableOpacity onPress={()=> alert('Add new products')}>
-        {plus}
-        </TouchableOpacity>
+        
 </View>
 </View>
       </ScrollView> 
@@ -160,21 +146,20 @@ const styles = StyleSheet.create({
   },
   MainContainer :{
 
-    justifyContent: 'center',
+    //justifyContent: 'center',
     flex:1,
-    margin: 10,
+   // margin: 0,  
     paddingTop: (Platform.OS) === 'ios' ? 20 : 0
     
     },
     
     GridViewBlockStyle: {
-    
       //justifyContent: 'center',
       flex:1,
-      textDecorationLine: 'underline'
+      textDecorationLine: 'underline',
      // alignItems: 'center',
       //height: 175,
-      //margin: 5
+       margin: 10
      
     
     },
@@ -203,4 +188,4 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
 });
-AppRegistry.registerComponent('Categories',() => Categories); 
+//AppRegistry.registerComponent('Categories',() => Categories); 

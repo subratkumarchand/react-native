@@ -44,22 +44,28 @@ export default class UserLogin extends React.Component {
      
       
       onSubmit = () =>{ 
-        //alert("you have entered \n emailId : " + this.state.emailId + "\n password :" + this.state.password);
-        //this.props.navigation.push('Category');
         let emailId = this.state.email;
         let password = this.state.password;
         if(emailId && password){
-            fetch('https://jsonplaceholder.typicode.com/users')       
+            fetch('https://vignancom.000webhostapp.com/')       
             .then(function(response) {  
             return response.json();
             })
             .then(function(data) {
                // console.log(JSON.stringify(data));
-            let email = data.find(x =>x.email == emailId);
-            let userName = data.find(x => x.username == password);
-             if(email && userName){
-				alert('ok');
-                   // this.props.navigation.push('Categories')
+            let email = data.find(x =>x.Email == emailId);
+            let pswrd = data.find(x => x.Password == password);
+             if(email && pswrd){
+				alert('login successfully');
+                // Alert.alert(
+                //     'Login',
+                //     'login successfully',
+                //     [
+                //       {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                //       {text: 'user list', onPress:() => this.props.navigation.navigate('Categories')},
+                //     ],
+                //     { cancelable: false }
+                //   )
             }else {
                  alert('please enter correct details');
                 

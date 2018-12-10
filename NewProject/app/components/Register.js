@@ -139,34 +139,31 @@ export default class Register extends React.Component {
             }
           });
           if(count==6){
-			fetch('http://192.168.0.188/api/user.php', {
-		  method: 'POST',
-		  headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify({
-				FirstName:this.state.firstname,
-				LastName: this.state.lastname,
-				Email: this.state.email,
-				Password: this.state.password,
-				ShopName: this.state.shopname,
-				ShopType: "dummy",
-				Address: this.state.address,
-				Profile: "dummy"
-			   }),
-			}).then((response) => response.json())
-		.then((data) => {
-
-		  //alert("registered successfully");
-		 //console.log(JSON.stringify(data));
-		 //this.props.navigation.push('login')
-		 alert(data.status_message);
-		 
-		})
-		.catch((error) => {
-		  console.error(error);
-		});
+           var data = {
+              FirstName:this.state.firstname,
+              LastName: this.state.lastname,
+              Email: this.state.email,
+              Password: this.state.password,
+              ShopName: this.state.shopname,
+              ShopType: "dummy",
+              Address: this.state.address,
+              Profile: "dummy"
+               };
+         //console.log(data);
+         var url = 'https://vignancom.000webhostapp.com/';
+        var ddd =  fetch(url, {
+           method: 'POST', // or 'PUT'
+           body: JSON.stringify(data), // data can be `string` or {object}!
+           headers:{
+             'Content-Type': 'application/json'
+           }
+         });
+         if(ddd){
+           alert("Success");
+           this.props.navigation.push('Categories')
+         }else{
+          alert("Somethings went wrong");
+         }
 				
 				
 				}
